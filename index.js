@@ -22,8 +22,14 @@ app.post(URI, async (req, res) => {
     const chatId = req.body.message.chat.id;
     const text = req.body.message.text;
 
-    if(text === "!github") {
-        await sendMessage(chatId, "GitHub: https://github.com/mstfsgdc");
+    switch(text) {
+        case "!github":
+            await sendMessage(chatId, "GitHub: https://github.com/mstfsgdc");
+        break;
+        
+        default:
+            await sendMessage(chatId, `Üzgünüm ${req.body.message.chat.first_name}, dediğini anlamadım.`);
+        break;
     }
     
     return res.send();
